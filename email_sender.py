@@ -1,6 +1,6 @@
 import smtplib
 from email.message import EmailMessage
-
+import os
 
 test_email = 'test2562006@gmail.com'
 my_password = 'brbebhtdhbpqcqxo'

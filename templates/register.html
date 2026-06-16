@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block styles %}
+{{ super() }}
+<style>
+body {
+    background-color: aqua !important;
+}
+.beautiful {
+    text-align: center;
+    font-size: 4rem;
+    color: green !important;
+}
+</style>
+{% endblock %}
+    {% block content %}
+    <div class="container justify-content-center beautiful">
+    <a class="header beautiful" href = "{{ url_for('signup') }}">signup</a><br>
+    <a class="header beautiful" href="{{ url_for('login') }}">login</a><br>
+    </div>
+    {% endblock %}

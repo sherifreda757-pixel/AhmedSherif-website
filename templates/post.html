@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/post-bg.jpg') }}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>{{post.title }}</h1>
+                            <h2 class="subheading">{{post.subtitle }}</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">{{post.author.name }}</a>
+                                on {{post.date }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p><img class="img-fluid" src="{{post.image}}" alt="{{post.title}}">
+                            {{post.body | safe}}
+                            Placeholder text by
+                            <a href="http://spaceipsum.com/">{{post.author.name }}</a>
+                            &middot; Images by
+                            <a href="https://www.flickr.com/photos/nasacommons/">{{post.author.name }}</a>
+                        </p>
+                    </div>
+                </div>
+                {% if current_user.id == 1 %}
+                <a class = 'btn btn-primary' href="{{ url_for('edit_post', id = post.id) }}">Edit</a><br><br>
+                {% endif %}
+                {% if post.comments %}
+                <br><br>
+                <h1 class = 'heading'>Comments: </h1><br>
+                {% for comment in post.comments %}
+                <p><img class = 'rounded-circle' src = " {{ comment.gravatar_url()}} " alt  = 'photo'> {{comment.commenter.name}}
+                    {% if current_user.id == 1 %} <a href="{{ url_for('delete_comment', id = comment.id) }}">        X</a> {% endif %}
+                    <br>
+                    {{ comment.text | safe }}</p><br>
+                {% endfor %}
+                {% else %} <p>No comments yet</p>
+                {% endif %}<br>
+                <a class = 'btn btn-dark' href="{{ url_for('comment', post_id = post.id) }}">comment</a>
+            </div>
+        </article>
+        {% endblock %}

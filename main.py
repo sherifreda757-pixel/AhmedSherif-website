@@ -9,13 +9,13 @@ from forms import LoginForm, SignupForm, CreatePostForm, CommentForm
 from email_sender import send_me_an_email
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
-import hashlib
+import hashlib, os
 
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
 ckeditor = CKEditor(app)
-app.config['SECRET_KEY'] = 'heh'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myyy_blog.db'
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "dev-secret-key") 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blogss.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager()

@@ -247,7 +247,5 @@ def delete_comment(id):
     return redirect(url_for('post', id = post_id))
     
 
-if __name__=='__main__':
-    app.run(debug=True)
 
 

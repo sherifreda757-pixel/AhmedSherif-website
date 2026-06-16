@@ -82,7 +82,10 @@ def gravatar_url(email, size = 30):
 
 @app.route('/')
 def register():
-    return render_template('register.html')
+    if current_user.is_authenticated:
+        return redirect (url_for('index'))
+    else:
+     return render_template('register.html')
 
 @login_manager.user_loader
 def user_loader(id):
@@ -246,6 +249,7 @@ def delete_comment(id):
     flash('comment deleted successfully!', 'success')
     return redirect(url_for('post', id = post_id))
     
+
 
 
 

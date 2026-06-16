@@ -1,10 +1,13 @@
 import smtplib
 from email.message import EmailMessage
 import os
+from dotenv import load_dotenv
 
-test_email = 'test2562006@gmail.com'
-my_password = 'brbebhtdhbpqcqxo'
-my_email = 'ahmed2562006abd@gmail.com'
+
+load_dotenv()
+test_email = os.getenv('test_email')
+my_password = os.getenv('my_password')
+my_email = os.getenv('my_email')
 
 
 def send_me_an_email(name, email, phone, message):
